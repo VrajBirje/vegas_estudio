@@ -11,9 +11,7 @@ import { CartModal } from "@/components/cart-modal"
 import { LoginModal } from "@/components/login-modal"
 import { useCart } from "@/lib/cart-context"
 import { useAuth } from "@/lib/auth-context"
-
-// API Base URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
+import { API_BASE_URL } from "@/lib/api"
 
 interface Service {
   id: string

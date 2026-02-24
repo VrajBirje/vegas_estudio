@@ -2,9 +2,10 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { API_BASE_URL } from "@/lib/api"
 
-// Base API URL - change this to your backend URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://vegas-estudio-backend.onrender.com'
+// Admin login email (and identifier) can be configured via environment variable
+const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'admin@vegas.com'
 
 type User = {
   id: string
@@ -98,23 +99,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
 
   const login = async (payload: any) => {
-    // Check if it's the admin email
-    const isAdmin = payload.identifier === 'admin@vegas.com' || payload.email === 'admin@vegas.com'
-    
-    let url, bodyData
-    
+    // determine if credentials correspond to the admin account
+    const identifier = payload.identifier || payload.email
+    const isAdmin = identifier === ADMIN_EMAIL
+
+    let url: string, bodyData: any
+
     if (isAdmin) {
       // For admin login, use the admin login endpoint with email and password
       url = `${API_BASE_URL}/auth/admin/login`
       bodyData = {
-        email: payload.identifier || payload.email,
-        password: payload.password
+        email: identifier,
+        password: payload.password,
       }
     } else {
       // For regular login
       url = `${API_BASE_URL}/auth/login`
       bodyData = payload
     }
+
+    // log payload for debugging
+    console.log('[auth] login request to', url, 'body:', bodyData)
 
     const res = await fetch(url, {
       method: 'POST',

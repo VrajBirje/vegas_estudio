@@ -59,9 +59,7 @@ interface Service {
   created_at: string
 }
 
-// API Base URL
-const API_BASE_URL = 'https://vegas-estudio-backend.onrender.com'
-// const API_BASE_URL = 'http://localhost:5000'
+import { API_BASE_URL } from "@/lib/api"
 
 export default function AdminPage() {
   const router = useRouter()
@@ -672,7 +670,8 @@ export default function AdminPage() {
                         <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Cliente</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Contacto</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Servicios</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Fecha y Hora</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Fecha</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Hora</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Duración</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Estado</th>
                       </tr>
@@ -706,10 +705,12 @@ export default function AdminPage() {
                               </div>
                             </td>
                             <td className="px-6 py-4">
-                              <p className="font-medium">{appointment.appointment_date}</p>
+                              <p className="font-medium" style={{color:"black"}}>{appointment.appointment_date}</p>
+                            </td>
+                            <td className="px-6 py-4">
                               <p className="text-sm text-muted-foreground">{appointment.start_time} - {appointment.end_time}</p>
                             </td>
-                            <td className="px-6 py-4 text-sm">{appointment.total_duration_minutes} min</td>
+                            <td className="px-6 py-4 text-sm" style={{color:"black"}}>{appointment.total_duration_minutes} min</td>
                             <td className="px-6 py-4">
                               <select
                                 value={appointment.status}

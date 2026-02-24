@@ -6,10 +6,7 @@ import { useAuth } from "@/lib/auth-context"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 
-// API Base URL
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://vegas-estudio-backend.onrender.com"
+import { API_BASE_URL } from "@/lib/api"
 
 /* ---------------- TYPES ---------------- */
 
@@ -177,6 +174,10 @@ export default function MyAppointmentsPage() {
                     <div>
                       <p className="font-semibold text-lg">
                         {formatDate(appt.appointment_date)}
+                      </p>
+                      {/* show raw date value as well for clarity */}
+                      <p className="text-xs text-muted-foreground">
+                        <em>{appt.appointment_date}</em>
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {formatTime(appt.start_time)} –{" "}

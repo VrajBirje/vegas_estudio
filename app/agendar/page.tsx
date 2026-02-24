@@ -15,8 +15,7 @@ import { DateTimeSelection } from "@/components/date-time-selection"
 import FullScreenLoader from "@/components/fullscreen-loader"
 
 
-// API Base URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://vegas-estudio-backend.onrender.com'
+import { API_BASE_URL } from "@/lib/api"
 
 interface Service {
   id: string

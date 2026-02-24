@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import { useAuth } from "./auth-context"
+import { API_BASE_URL } from "./api"
 
 export interface CartItem {
   id: string
@@ -23,8 +24,6 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const { token } = useAuth()
